@@ -1,0 +1,50 @@
+# Ignore Orchestrator specific files (if used)
+# project.json
+*.local/
+
+# Ignore Logs folder
+Logs/
+
+# Ignore Output folder
+Output/
+
+# Ignore Temporary files
+*.tmp
+
+# Ignore User-specific files
+*.user
+
+# Ignore Compiled files
+*.dll
+*.exe
+*.pdb
+
+# Ignore Visual Studio files (if used for development)
+.vs/
+*.suo
+*.user
+*.sln
+*.csproj
+*.csproj.user
+
+# Ignore Dependency directories
+packages/
+
+# Ignore NuGet executable scripts
+*.nupkg
+*.nuspec
+
+# Ignore IDE-specific files (if used)
+.vscode/
+.idea/
+
+# Ignore credentials, secrets, and configuration files
+config.json
+credentials.json
+secrets.json
+
+# Ignore Robot log files (if not necessary)
+*.log
+
+# Ignore temporary and backup files
+*~
