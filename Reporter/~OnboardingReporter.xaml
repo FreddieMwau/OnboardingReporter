@@ -95,6 +95,7 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>GlobalVariablesT1PNoYwrqg</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This sequence automates the daily analysis of onboarding transaction processing data. It retrieves relevant information from the database, calculates key metrics, and populates data tables for further processing or visualization." sap:VirtualizedContainerService.HintSize="592,3819.2" sap2010:WorkflowViewState.IdRef="Sequence_19">
