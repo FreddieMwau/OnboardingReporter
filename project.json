@@ -4,6 +4,7 @@
   "description": "This automation is responsible of running a couple of SQL Queries, generating a weekly report and emails it to the clients plus cc's the RPA team",
   "main": "Main.xaml",
   "dependencies": {
+    "UiPath.Database.Activities": "[1.8.2-preview]",
     "UiPath.Excel.Activities": "[2.23.2-preview]",
     "UiPath.System.Activities": "[24.2.0-preview]",
     "UiPath.Testing.Activities": "[24.2.0-preview]",
