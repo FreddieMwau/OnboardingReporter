@@ -247,7 +247,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:AddDataRow>
-          <ui:OutputDataTable DataTable="[dt_DataTable]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="529.6,120.8" sap2010:WorkflowViewState.IdRef="OutputDataTable_3" Text="[str_DataTable]" />
+          <ui:OutputDataTable DataTable="[dt_DataTable]" DisplayName="Output Data Table - Transaction Status Summary" sap:VirtualizedContainerService.HintSize="529.6,120.8" sap2010:WorkflowViewState.IdRef="OutputDataTable_3" Text="[str_DataTable]" />
           <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="529.6,125.6" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[str_DataTable]" />
           <ui:BuildDataTable DataTable="[dt_TransactionsList]" DisplayName="Build Data Table - Transactions Longer Than Average" sap:VirtualizedContainerService.HintSize="529.6,100" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Processing_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Avg_Processing_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
           <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_Transactions]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="529.6,503.2" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
@@ -273,7 +273,13 @@
               </ActivityAction>
             </ui:ForEachRow.Body>
           </ui:ForEachRow>
-          <ui:OutputDataTable DataTable="[dt_TransactionsList]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="529.6,120.8" sap2010:WorkflowViewState.IdRef="OutputDataTable_5" Text="[str_TransactionsList]" />
+          <ui:OutputDataTable sap2010:Annotation.AnnotationText="" DataTable="[dt_TransactionsList]" DisplayName="Output Data Table - Transactions list" sap:VirtualizedContainerService.HintSize="529.6,120.8" sap2010:WorkflowViewState.IdRef="OutputDataTable_5" Text="[str_TransactionsList]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:OutputDataTable>
           <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="529.6,125.6" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[str_TransactionsList]" />
           <ui:DatabaseDisconnect DatabaseConnection="[str_dbConnection]" DisplayName="Disconnect from Database" sap:VirtualizedContainerService.HintSize="529.6,48" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
         </Sequence>
@@ -319,9 +325,7 @@
               <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[in_Config(&quot;EmailSubject&quot;).ToString]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="433.6,188.8" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Config(&quot;EmailSubject&quot;).ToString]" To="[in_Config(&quot;EmailCredentials&quot;).ToString]">
                 <ui:SendOutlookMail.Files>
                   <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                    <InArgument x:TypeArguments="x:String">
-                      <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_FilePath" />
-                    </InArgument>
+                    <InArgument x:TypeArguments="x:String">[str_FilePath]</InArgument>
                   </scg:List>
                 </ui:SendOutlookMail.Files>
               </ui:SendOutlookMail>
