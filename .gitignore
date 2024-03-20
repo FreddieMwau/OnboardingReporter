@@ -10,6 +10,13 @@ Output/
 
 # Ignore Temporary files
 *.tmp
+.settings/*
+.local/*
+.objects/*
+.screenshots/*
+ 
+# Project files
+./project.json
 
 # Ignore User-specific files
 *.user
