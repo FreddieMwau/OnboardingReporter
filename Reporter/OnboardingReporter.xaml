@@ -240,9 +240,15 @@
           <ui:DatabaseDisconnect DatabaseConnection="[str_dbConnection]" DisplayName="Disconnect from Database" sap:VirtualizedContainerService.HintSize="450,65.33333333333333" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporter\GenerateReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Reporter\GenerateReport.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataTable">[dt_TransactionsAggregates]</InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TransactionsList">[dt_TransactionsList]</InArgument>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataTable">
+                <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_TransactionsAggregates" />
+              </InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TransactionsList">
+                <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_TransactionsList" />
+              </InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+              </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
