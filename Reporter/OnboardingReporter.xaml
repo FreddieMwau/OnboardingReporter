@@ -141,14 +141,14 @@
               <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:DatabaseConnect sap2010:Annotation.AnnotationText="Establishes a connection to your onboarding database using the appropriate connection string and credentials." DisplayName="Connect to Database" sap:VirtualizedContainerService.HintSize="450,100" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="Microsoft.Data.SqlClient" ConnectionString="Data Source=&quot;localhost, 1433&quot;;Initial Catalog=RPA-reporter;Persist Security Info=True;User ID=sa;Password=YourStrong!Passw0rd;Encrypt=False" DatabaseConnection="[str_dbConnection]">
+          <ui:DatabaseConnect sap2010:Annotation.AnnotationText="Establishes a connection to your onboarding database using the appropriate connection string and credentials." DisplayName="Connect to Database" sap:VirtualizedContainerService.HintSize="450,100" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="Microsoft.Data.SqlClient" ConnectionString="Data Source=localhost;Initial Catalog=RPA-Reporter;Persist Security Info=True;User ID=sa;Password=YourStrong!Passw0rd;Encrypt=False" DatabaseConnection="[str_dbConnection]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:DatabaseConnect>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve the aggregate values of different transaction statuses in the last 7 days.&#xA;The query calculates the aggregate counts for successful transactions, business exceptions, and system exceptions within the last 7 days" DataTable="[dt_RetrievedData]" DisplayName="Run Query - Aggregate Transaction Status" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="SELECT &#xA;    SUM(CASE WHEN [Automation Status] = 1 THEN 1 ELSE 0 END) AS Successful_Transactions,&#xA;    SUM(CASE WHEN [Business_Exception] IS NOT NULL THEN 1 ELSE 0 END) AS Business_Exceptions,&#xA;    SUM(CASE WHEN [System_Exception] IS NOT NULL THEN 1 ELSE 0 END) AS System_Exceptions&#xA;FROM OnboardingReporter&#xA;WHERE [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xA;">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve the aggregate values of different transaction statuses in the last 7 days.&#xA;The query calculates the aggregate counts for successful transactions, business exceptions, and system exceptions within the last 7 days" DataTable="[dt_RetrievedData]" DisplayName="Run Query - Aggregate Transaction Status" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="SELECT &#xD;&#xA;    SUM(CASE WHEN [AutomationStatus] = 1 THEN 1 ELSE 0 END) AS Successful_Transactions,&#xD;&#xA;    SUM(CASE WHEN [BusinessException] IS NOT NULL THEN 1 ELSE 0 END) AS Business_Exceptions,&#xD;&#xA;    SUM(CASE WHEN [SystemException] IS NOT NULL THEN 1 ELSE 0 END) AS System_Exceptions&#xD;&#xA;FROM Reports&#xD;&#xA;WHERE [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xD;&#xA;">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
@@ -158,7 +158,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ExecuteQuery>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to calculate the average processing time of successful transactions in the last 7 days." DataTable="[dt_RetrievedAvgTime]" DisplayName="Run Query - Average Processing Time" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="SELECT AVG(DATEDIFF(MINUTE, [Start Time], [End Time])) AS Average_Processing_Time&#xA;FROM OnboardingReporter&#xA;WHERE [End Time] IS NOT NULL&#xA;    AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xA;">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to calculate the average processing time of successful transactions in the last 7 days." DataTable="[dt_RetrievedAvgTime]" DisplayName="Run Query - Average Processing Time" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="SELECT AVG(DATEDIFF(MINUTE, [Start Time], [EndTime])) AS AverageProcessing_Time&#xD;&#xA;FROM Reports&#xD;&#xA;WHERE [EndTime] IS NOT NULL&#xD;&#xA;    AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xD;&#xA;">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
@@ -168,7 +168,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ExecuteQuery>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve transactions that took longer than the average processing time in the last 7 days.&#xA;The query retrieves a list of transaction IDs, processing times, and average processing time and filters the results to include only transactions that took longer than the average processing time." DataTable="[dt_Transactions]" DisplayName="Run Query - Transactions Longer Than Average" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="WITH TransactionTimes AS (&#xA;    SELECT &#xA;        [ID], &#xA;        DATEDIFF(MINUTE, [Start Time], [End Time]) AS Processing_Time,&#xA;        AVG(DATEDIFF(MINUTE, [Start Time], [End Time])) OVER() AS Avg_Processing_Time&#xA;    FROM OnboardingReporter&#xA;    WHERE [End Time] IS NOT NULL&#xA;&#x9;&#x9;AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE())&#xA;)&#xA;SELECT &#xA;    [ID],&#xA;    Processing_Time,&#xA;    Avg_Processing_Time&#xA;FROM TransactionTimes&#xA;WHERE Processing_Time &gt; Avg_Processing_Time;&#xA;">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve transactions that took longer than the average processing time in the last 7 days.&#xA;The query retrieves a list of transaction IDs, processing times, and average processing time and filters the results to include only transactions that took longer than the average processing time." DataTable="[dt_Transactions]" DisplayName="Run Query - Transactions Longer Than Average" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="WITH TransactionTimes AS (&#xD;&#xA;    SELECT &#xD;&#xA;        [ID], &#xD;&#xA;        DATEDIFF(MINUTE, [StartTime], [EndTime]) AS Processing_Time,&#xD;&#xA;        AVG(DATEDIFF(MINUTE, [StartTime], [EndTime])) OVER() AS Avg_Processing_Time&#xD;&#xA;    FROM Reports&#xD;&#xA;    WHERE [EndTime] IS NOT NULL&#xD;&#xA;&#x9;&#x9;AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE())&#xD;&#xA;)&#xD;&#xA;SELECT &#xD;&#xA;    [ID],&#xD;&#xA;    Processing_Time,&#xD;&#xA;    Avg_Processing_Time&#xD;&#xA;FROM TransactionTimes&#xD;&#xA;WHERE Processing_Time &gt; Avg_Processing_Time;&#xD;&#xA;">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
@@ -240,15 +240,9 @@
           <ui:DatabaseDisconnect DatabaseConnection="[str_dbConnection]" DisplayName="Disconnect from Database" sap:VirtualizedContainerService.HintSize="450,65.33333333333333" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporter\GenerateReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Reporter\GenerateReport.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataTable">
-                <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_TransactionsAggregates" />
-              </InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TransactionsList">
-                <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_TransactionsList" />
-              </InArgument>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-              </InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataTable">[dt_TransactionsAggregates]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_TransactionsList">[dt_TransactionsList]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
@@ -265,7 +259,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence sap2010:Annotation.AnnotationText="This sequence handles system exceptions that may occur during the automation process. It includes activities to capture a screenshot of the screen when an exception occurs and sends an email notification to stakeholders to inform them about the encountered issue." sap:VirtualizedContainerService.HintSize="495.3333333333333,596" sap2010:WorkflowViewState.IdRef="Sequence_23">
+            <Sequence sap2010:Annotation.AnnotationText="This sequence handles system exceptions that may occur during the automation process. It includes activities to capture a screenshot of the screen when an exception occurs and sends an email notification to stakeholders to inform them about the encountered issue." sap:VirtualizedContainerService.HintSize="496,600" sap2010:WorkflowViewState.IdRef="Sequence_23">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:String" Name="str_FolderPath" />
                 <Variable x:TypeArguments="x:String" Name="str_FilePath" />
