@@ -2,7 +2,7 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1397.3333333333333,3113.3333333333335</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1397.3333333333333,3300.6666666666665</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -114,15 +114,15 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="612.6666666666666,3048.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_22">
+  <Sequence sap:VirtualizedContainerService.HintSize="615.3333333333334,3236" sap2010:WorkflowViewState.IdRef="Sequence_22">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="550.6666666666666,2960.6666666666665" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="553.3333333333334,3148" sap2010:WorkflowViewState.IdRef="TryCatch_4">
       <TryCatch.Try>
-        <Sequence sap2010:Annotation.AnnotationText="This sequence executes SQL queries to retrieve transaction data, calculates average processing time and aggregate transaction statuses, builds data tables, and adds relevant data to them." sap:VirtualizedContainerService.HintSize="512,2698.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_21">
+        <Sequence sap2010:Annotation.AnnotationText="This sequence executes SQL queries to retrieve transaction data, calculates average processing time and aggregate transaction statuses, builds data tables, and adds relevant data to them." sap:VirtualizedContainerService.HintSize="514.6666666666666,2886" sap2010:WorkflowViewState.IdRef="Sequence_21">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataTable" Name="dt_RetrievedData" />
             <Variable x:TypeArguments="sd:DataTable" Name="dt_RetrievedAvgTime" />
@@ -141,14 +141,14 @@
               <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:DatabaseConnect sap2010:Annotation.AnnotationText="Establishes a connection to your onboarding database using the appropriate connection string and credentials." DisplayName="Connect to Database" sap:VirtualizedContainerService.HintSize="450,100" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="Microsoft.Data.SqlClient" ConnectionString="Data Source=localhost;Initial Catalog=RPA-Reporter;Persist Security Info=True;User ID=sa;Password=YourStrong!Passw0rd;Encrypt=False" DatabaseConnection="[str_dbConnection]">
+          <ui:DatabaseConnect sap2010:Annotation.AnnotationText="Establishes a connection to your onboarding database using the appropriate connection string and credentials." DisplayName="Connect to Database" sap:VirtualizedContainerService.HintSize="452.6666666666667,100" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="Microsoft.Data.SqlClient" ConnectionString="Data Source=localhost;Initial Catalog=RPA-Reporter;Persist Security Info=True;User ID=sa;Password=YourStrong!Passw0rd;Encrypt=False" DatabaseConnection="[str_dbConnection]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:DatabaseConnect>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve the aggregate values of different transaction statuses in the last 7 days.&#xA;The query calculates the aggregate counts for successful transactions, business exceptions, and system exceptions within the last 7 days" DataTable="[dt_RetrievedData]" DisplayName="Run Query - Aggregate Transaction Status" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="SELECT &#xD;&#xA;    SUM(CASE WHEN [AutomationStatus] = 1 THEN 1 ELSE 0 END) AS Successful_Transactions,&#xD;&#xA;    SUM(CASE WHEN [BusinessException] IS NOT NULL THEN 1 ELSE 0 END) AS Business_Exceptions,&#xD;&#xA;    SUM(CASE WHEN [SystemException] IS NOT NULL THEN 1 ELSE 0 END) AS System_Exceptions&#xD;&#xA;FROM Reports&#xD;&#xA;WHERE [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xD;&#xA;">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve the aggregate values of different transaction statuses in the last 7 days.&#xA;The query calculates the aggregate counts for successful transactions, business exceptions, and system exceptions within the last 7 days" DataTable="[dt_RetrievedData]" DisplayName="Run Query - Aggregate Transaction Status" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="452.6666666666667,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="SELECT &#xA;    SUM(CASE WHEN [AutomationStatus] = 1 THEN 1 ELSE 0 END) AS Successful_Transactions,&#xA;    SUM(CASE WHEN [BusinessException] IS NOT NULL THEN 1 ELSE 0 END) AS Business_Exceptions,&#xA;    SUM(CASE WHEN [SystemException] IS NOT NULL THEN 1 ELSE 0 END) AS System_Exceptions&#xA;FROM Reports&#xA;WHERE [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xA;">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
@@ -158,7 +158,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ExecuteQuery>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to calculate the average processing time of successful transactions in the last 7 days." DataTable="[dt_RetrievedAvgTime]" DisplayName="Run Query - Average Processing Time" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="SELECT AVG(DATEDIFF(MINUTE, [Start Time], [EndTime])) AS AverageProcessing_Time&#xD;&#xA;FROM Reports&#xD;&#xA;WHERE [EndTime] IS NOT NULL&#xD;&#xA;    AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xD;&#xA;">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to calculate the average processing time of successful transactions in the last 7 days." DataTable="[dt_RetrievedAvgTime]" DisplayName="Run Query - Average Processing Time" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="452.6666666666667,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="SELECT AVG(DATEDIFF(MINUTE, [StartTime], [EndTime])) AS AverageProcessing_Time&#xD;&#xA;FROM Reports&#xD;&#xA;WHERE [EndTime] IS NOT NULL&#xD;&#xA;    AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE());&#xD;&#xA;">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
@@ -168,7 +168,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ExecuteQuery>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve transactions that took longer than the average processing time in the last 7 days.&#xA;The query retrieves a list of transaction IDs, processing times, and average processing time and filters the results to include only transactions that took longer than the average processing time." DataTable="[dt_Transactions]" DisplayName="Run Query - Transactions Longer Than Average" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="450,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="WITH TransactionTimes AS (&#xD;&#xA;    SELECT &#xD;&#xA;        [ID], &#xD;&#xA;        DATEDIFF(MINUTE, [StartTime], [EndTime]) AS Processing_Time,&#xD;&#xA;        AVG(DATEDIFF(MINUTE, [StartTime], [EndTime])) OVER() AS Avg_Processing_Time&#xD;&#xA;    FROM Reports&#xD;&#xA;    WHERE [EndTime] IS NOT NULL&#xD;&#xA;&#x9;&#x9;AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE())&#xD;&#xA;)&#xD;&#xA;SELECT &#xD;&#xA;    [ID],&#xD;&#xA;    Processing_Time,&#xD;&#xA;    Avg_Processing_Time&#xD;&#xA;FROM TransactionTimes&#xD;&#xA;WHERE Processing_Time &gt; Avg_Processing_Time;&#xD;&#xA;">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Execute a SQL query to retrieve transactions that took longer than the average processing time in the last 7 days.&#xA;The query retrieves a list of transaction IDs, processing times, and average processing time and filters the results to include only transactions that took longer than the average processing time." DataTable="[dt_Transactions]" DisplayName="Run Query - Transactions Longer Than Average" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="452.6666666666667,156" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="WITH TransactionTimes AS (&#xA;    SELECT &#xA;        [ID], &#xA;        DATEDIFF(MINUTE, [StartTime], [EndTime]) AS Processing_Time,&#xA;        AVG(DATEDIFF(MINUTE, [StartTime], [EndTime])) OVER() AS Avg_Processing_Time&#xA;    FROM Reports&#xA;    WHERE [EndTime] IS NOT NULL&#xA;&#x9;&#x9;AND [TimeStamp] &gt;= DATEADD(DAY, -7, GETDATE())&#xA;)&#xA;SELECT &#xA;    [ID],&#xA;    Processing_Time,&#xA;    Avg_Processing_Time&#xA;FROM TransactionTimes&#xA;WHERE Processing_Time &gt; Avg_Processing_Time;&#xA;">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
@@ -178,8 +178,8 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ExecuteQuery>
-          <ui:BuildDataTable DataTable="[dt_TransactionsAggregates]" DisplayName="Build Data Table - Transaction Status Summary" sap:VirtualizedContainerService.HintSize="450,100" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Successful_Transactions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Business_Exceptions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;System_Exceptions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_RetrievedData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="450,506.6666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+          <ui:BuildDataTable DataTable="[dt_TransactionsAggregates]" DisplayName="Build Data Table - Transaction Status Summary" sap:VirtualizedContainerService.HintSize="452.6666666666667,100" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Successful_Transactions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Business_Exceptions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;System_Exceptions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_RetrievedData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="452.6666666666667,506.6666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
             <ui:ForEachRow.Body>
               <ActivityAction x:TypeArguments="sd:DataRow">
                 <ActivityAction.Argument>
@@ -202,10 +202,10 @@
               </ActivityAction>
             </ui:ForEachRow.Body>
           </ui:ForEachRow>
-          <ui:OutputDataTable DataTable="[dt_TransactionsAggregates]" DisplayName="Output Data Table - Transaction Status Summary" sap:VirtualizedContainerService.HintSize="450,122" sap2010:WorkflowViewState.IdRef="OutputDataTable_3" Text="[str_TransactionsAggregates]" />
-          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="450,126.66666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[str_TransactionsAggregates]" />
-          <ui:BuildDataTable DataTable="[dt_TransactionsList]" DisplayName="Build Data Table - Transactions Longer Than Average" sap:VirtualizedContainerService.HintSize="450,100" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Processing_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Avg_Processing_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_Transactions]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="450,506.6666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+          <ui:OutputDataTable DataTable="[dt_TransactionsAggregates]" DisplayName="Output Data Table - Transaction Status Summary" sap:VirtualizedContainerService.HintSize="452.6666666666667,122" sap2010:WorkflowViewState.IdRef="OutputDataTable_3" Text="[str_TransactionsAggregates]" />
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="452.6666666666667,126.66666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[str_TransactionsAggregates]" />
+          <ui:BuildDataTable DataTable="[dt_TransactionsList]" DisplayName="Build Data Table - Transactions Longer Than Average" sap:VirtualizedContainerService.HintSize="452.6666666666667,100" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Processing_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Avg_Processing_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_Transactions]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="452.6666666666667,506.6666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
             <ui:ForEachRow.Body>
               <ActivityAction x:TypeArguments="sd:DataRow">
                 <ActivityAction.Argument>
@@ -228,17 +228,28 @@
               </ActivityAction>
             </ui:ForEachRow.Body>
           </ui:ForEachRow>
-          <ui:OutputDataTable sap2010:Annotation.AnnotationText="" DataTable="[dt_TransactionsList]" DisplayName="Output Data Table - Transactions list" sap:VirtualizedContainerService.HintSize="450,122" sap2010:WorkflowViewState.IdRef="OutputDataTable_5" Text="[str_TransactionsList]">
+          <ui:OutputDataTable sap2010:Annotation.AnnotationText="" DataTable="[dt_TransactionsList]" DisplayName="Output Data Table - Transactions list" sap:VirtualizedContainerService.HintSize="452.6666666666667,122" sap2010:WorkflowViewState.IdRef="OutputDataTable_5" Text="[str_TransactionsList]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:OutputDataTable>
-          <Throw Exception="[New SystemException(&quot;Failed!&quot;)]" sap:VirtualizedContainerService.HintSize="450,132" sap2010:WorkflowViewState.IdRef="Throw_2" />
-          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="450,126.66666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[str_TransactionsList]" />
-          <ui:DatabaseDisconnect DatabaseConnection="[str_dbConnection]" DisplayName="Disconnect from Database" sap:VirtualizedContainerService.HintSize="450,65.33333333333333" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporter\GenerateReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Reporter\GenerateReport.xaml">
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="452.6666666666667,319.3333333333333" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,199.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Throw Exception="[New SystemException(&quot;Failed!&quot;)]" sap:VirtualizedContainerService.HintSize="354,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_2" />
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="452.6666666666667,126.66666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[str_TransactionsList]" />
+          <ui:DatabaseDisconnect DatabaseConnection="[str_dbConnection]" DisplayName="Disconnect from Database" sap:VirtualizedContainerService.HintSize="452.6666666666667,65.33333333333333" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporter\GenerateReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="452.6666666666667,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Reporter\GenerateReport.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_DataTable">
                 <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_TransactionsAggregates" />
@@ -254,7 +265,7 @@
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="516.6666666666666,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="519.3333333333334,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -265,7 +276,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence sap2010:Annotation.AnnotationText="This sequence handles system exceptions that may occur during the automation process. It includes activities to capture a screenshot of the screen when an exception occurs and sends an email notification to stakeholders to inform them about the encountered issue." sap:VirtualizedContainerService.HintSize="496,600" sap2010:WorkflowViewState.IdRef="Sequence_23">
+            <Sequence sap2010:Annotation.AnnotationText="This sequence handles system exceptions that may occur during the automation process. It includes activities to capture a screenshot of the screen when an exception occurs and sends an email notification to stakeholders to inform them about the encountered issue." sap:VirtualizedContainerService.HintSize="496,608.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_23">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:String" Name="str_FolderPath" />
                 <Variable x:TypeArguments="x:String" Name="str_FilePath" />
@@ -285,20 +296,20 @@
                   <InArgument x:TypeArguments="x:String">Exceptions_Screenshots</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot Workflow" sap:VirtualizedContainerService.HintSize="433.6,153.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot Workflow" sap:VirtualizedContainerService.HintSize="434,155.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[str_FolderPath]</InArgument>
                   <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">[str_FilePath]</InOutArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
-              <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[in_Config(&quot;EmailBody&quot;).ToString.Replace(&quot;@Source&quot;,  exception.Source.ToString).Replace(&quot;@Message&quot;, exception.Message.ToString)]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="433.6,188.8" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Config(&quot;EmailSubject&quot;).ToString]" To="[in_Config(&quot;EmailCredentials&quot;).ToString]">
+              <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[in_Config(&quot;EmailBody&quot;).ToString.Replace(&quot;@Source&quot;,  exception.Source.ToString).Replace(&quot;@Message&quot;, exception.Message.ToString)]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="434,198" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Config(&quot;EmailSubject&quot;).ToString]" To="[in_Config(&quot;EmailCredentials&quot;).ToString]">
                 <ui:SendOutlookMail.Files>
                   <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
                     <InArgument x:TypeArguments="x:String">[str_FilePath]</InArgument>
                   </scg:List>
                 </ui:SendOutlookMail.Files>
               </ui:SendOutlookMail>
-              <Rethrow sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+              <Rethrow sap:VirtualizedContainerService.HintSize="434,48" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
             </Sequence>
           </ActivityAction>
         </Catch>
