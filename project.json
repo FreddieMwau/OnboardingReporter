@@ -4,6 +4,7 @@
   "description": "This automation is responsible of running a couple of SQL Queries, generating a weekly report and emails it to the clients plus cc's the RPA team",
   "main": "Main.xaml",
   "dependencies": {
+    "BalaReva.Excel.Activities": "[2021.1.0]",
     "UiPath.Database.Activities": "[1.8.2-preview]",
     "UiPath.Excel.Activities": "[2.23.2-preview]",
     "UiPath.Mail.Activities": "[1.22.2]",
