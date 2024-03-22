@@ -4,7 +4,7 @@
     <x:Property Name="dt_TransactionsList" Type="InArgument(sd:DataTable)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1397.3333333333333,1167.3333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1171.3333333333333,1167.3333333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -129,6 +129,11 @@
   <Sequence sap:VirtualizedContainerService.HintSize="612.6666666666666,1102.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_24">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="_out_GetRobotAsset_1__TextValue" />
+      <Variable x:TypeArguments="x:String" Name="Reports">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">Reports</Literal>
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -165,11 +170,14 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:WriteRange AddHeaders="True" DataTable="[dt_DataTable]" DisplayName="Write the DataTable Range to Excel Workbook" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="Onboarding Reporter" StartingCell="A1:F1" WorkbookPath="Data\Reports.xlsx" />
-                  <ui:WriteRange AddHeaders="True" DataTable="[dt_TransactionsList]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName=" Reports" StartingCell="A1:C4" WorkbookPath="Data\Reports.xlsx" />
+                  <ui:WriteRange AddHeaders="True" DataTable="[dt_TransactionsList]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="[Reports]" StartingCell="A1:C2" WorkbookPath="Data\Reports.xlsx" />
                   <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ChartGenerator.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Reporter\ChartGenerator.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
                         <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Reports">
+                        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Reports" />
                       </InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>

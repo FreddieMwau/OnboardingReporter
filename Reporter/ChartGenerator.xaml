@@ -1,8 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ChartGenerator" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:bec="clr-namespace:BalaReva.Excel.Charts;assembly=BalaReva.Excel" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ChartGenerator" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:bec="clr-namespace:BalaReva.Excel.Charts;assembly=BalaReva.Excel" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:um="clr-namespace:UiPath.Mail;assembly=UiPath.Mail.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="Reports" Type="InArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1397.3333333333333,3002</sap:VirtualizedContainerService.HintSize>
+  <this:ChartGenerator.Reports>
+    <InArgument x:TypeArguments="x:String" />
+  </this:ChartGenerator.Reports>
+  <sap:VirtualizedContainerService.HintSize>1397.3333333333333,3074</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -43,6 +47,7 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>UiPath.Excel.Model</x:String>
+      <x:String>UiPath.Mail.Activities.Business</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -119,13 +124,13 @@
       <AssemblyReference>BalaReva.Excel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="949.3333333333334,2937.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_33">
+  <Sequence sap:VirtualizedContainerService.HintSize="850.6666666666666,3009.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_33">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="887.3333333333334,2849.3333333333335" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="788.6666666666666,2921.3333333333335" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Variables>
         <Variable x:TypeArguments="x:String" Name="str_FolderPath" />
       </TryCatch.Variables>
@@ -136,43 +141,65 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="848.6666666666666,2564" sap2010:WorkflowViewState.IdRef="Sequence_32">
+        <Sequence sap:VirtualizedContainerService.HintSize="750,2636" sap2010:WorkflowViewState.IdRef="Sequence_32">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence sap:VirtualizedContainerService.HintSize="786.6666666666666,2479.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_31">
+          <Sequence sap:VirtualizedContainerService.HintSize="688,2551.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_31">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Default="Reporter\Images" Name="ImageFolder" />
               <Variable x:TypeArguments="x:String" Name="_out_GetRobotAsset_1__TextValue" />
               <Variable x:TypeArguments="x:String" Default="C:\Users\BellianBrianOtieno\OneDrive - THH LLC\Documents\UiPath\OnboardingReporter\Data\Reports.xlsx" Name="ExcelFilePath" />
+              <Variable x:TypeArguments="x:String" Name="str_AttachmentPath">
+                <Variable.Default>
+                  <Literal x:TypeArguments="x:String">C:\Users\BellianBrianOtieno\OneDrive - THH LLC\Documents\UiPath\OnboardingReporter\Data\Report.pdf</Literal>
+                </Variable.Default>
+              </Variable>
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="724.6666666666666,1684" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+            <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="626,1832.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
               <ueab:ExcelProcessScopeX.Body>
                 <ActivityAction x:TypeArguments="ui:IExcelProcess">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="690.6666666666666,1556.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="592,1705.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_35">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="628.6666666666666,1472" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" WorkbookPath="Data\Reports.xlsx">
+                    <bec:PieChart ExecutionResult="{x:Null}" FilePassword="{x:Null}" LegendRange="{x:Null}" ModifyPassword="{x:Null}" CellRange="A1:C2" ChartTitle="TransactionProcessing Summary" ChartType="Pie" ContinueOnError="True" Delay="3" DisplayName="Pie Chart" FilePath="C:\Users\BellianBrianOtieno\OneDrive - THH LLC\Documents\UiPath\OnboardingReporter\Data\Reports.xlsx" sap:VirtualizedContainerService.HintSize="530,110" sap2010:WorkflowViewState.IdRef="PieChart_2" ImageCopy="[ImageFolder]" SheetName="Onboarding Reporter">
+                      <bec:PieChart.Options>
+                        <bec:ShowOptions AutoText="True" DataLabelsType="ShowLabel" HasLeaderLines="False" LegendKey="ShowLabel" Separator="" ShowBubbleSize="False" ShowCategoryName="False" ShowLegend="True" ShowPercentage="True" ShowSeriesName="False" ShowValue="True" />
+                      </bec:PieChart.Options>
+                      <bec:PieChart.Size>
+                        <bec:ChartSize Height="250" Left="50" Top="50" Width="250" />
+                      </bec:PieChart.Size>
+                    </bec:PieChart>
+                    <bec:BarChart ExecutionResult="{x:Null}" FilePassword="{x:Null}" LegendRange="{x:Null}" ModifyPassword="{x:Null}" CellRange="B1:C2" ChartTitle="ProcessingTime" ChartType="BarClustered" ContinueOnError="True" Delay="3" DisplayName="Bar Chart" FilePath="C:\Users\BellianBrianOtieno\OneDrive - THH LLC\Documents\UiPath\OnboardingReporter\Data\Reports.xlsx" sap:VirtualizedContainerService.HintSize="530,110" sap2010:WorkflowViewState.IdRef="BarChart_1" ImageCopy="[ImageFolder]" SheetName="[Reports]">
+                      <bec:BarChart.Options>
+                        <bec:ShowOptions AutoText="True" DataLabelsType="ShowPercent" HasLeaderLines="False" LegendKey="ShowLabel" Separator="" ShowBubbleSize="False" ShowCategoryName="False" ShowLegend="True" ShowPercentage="True" ShowSeriesName="False" ShowValue="True" />
+                      </bec:BarChart.Options>
+                      <bec:BarChart.Size>
+                        <bec:ChartSize Height="450" Left="50" Top="50" Width="350" />
+                      </bec:BarChart.Size>
+                    </bec:BarChart>
+                    <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="530,176.66666666666666" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="Excel" />
+                    <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="530,1224" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" WorkbookPath="Data\Reports.xlsx">
                       <ueab:ExcelApplicationCard.Body>
                         <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
                           <ActivityAction.Argument>
                             <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
                           </ActivityAction.Argument>
-                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="594.6666666666666,1168.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,920.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_36">
                             <Sequence.Variables>
                               <Variable x:TypeArguments="x:String" Default="Summary of Processing" Name="TableName" />
                               <Variable x:TypeArguments="x:String" Default="Processing Time" Name="TableName2" />
@@ -182,36 +209,21 @@
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ueab:CreateTableX TableName="{x:Null}" DisplayName="Private: Format as Table" HasHeaders="True" sap:VirtualizedContainerService.HintSize="532.6666666666666,258.6666666666667" sap2010:WorkflowViewState.IdRef="CreateTableX_1" OutTableName="[TableName]" Range="[Excel.Sheet(&quot;Onboarding Reporter&quot;)]" />
-                            <bec:PieChart ExecutionResult="{x:Null}" FilePassword="{x:Null}" LegendRange="{x:Null}" ModifyPassword="{x:Null}" CellRange="A1:C2" ChartTitle="TransactionProcessing Summary" ChartType="Pie" ContinueOnError="True" Delay="3" DisplayName="Pie Chart" FilePath="C:\Users\BellianBrianOtieno\OneDrive - THH LLC\Documents\UiPath\OnboardingReporter\Data\Reports.xlsx" sap:VirtualizedContainerService.HintSize="532.6666666666666,110" sap2010:WorkflowViewState.IdRef="PieChart_2" ImageCopy="[ImageFolder]" SheetName="Onboarding Reporter">
-                              <bec:PieChart.Options>
-                                <bec:ShowOptions AutoText="True" DataLabelsType="ShowLabel" HasLeaderLines="False" LegendKey="ShowLabel" Separator="" ShowBubbleSize="False" ShowCategoryName="False" ShowLegend="True" ShowPercentage="False" ShowSeriesName="True" ShowValue="True" />
-                              </bec:PieChart.Options>
-                              <bec:PieChart.Size>
-                                <bec:ChartSize Height="250" Left="50" Top="50" Width="250" />
-                              </bec:PieChart.Size>
-                            </bec:PieChart>
-                            <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="532.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="Excel" />
-                            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="532.6666666666666,446" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-                              <ui:CommentOut.Body>
-                                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="496,326" sap2010:WorkflowViewState.IdRef="Sequence_38">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <ueab:CreateTableX TableName="{x:Null}" DisplayName="Format as Table" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,241.33333333333334" sap2010:WorkflowViewState.IdRef="CreateTableX_2" OutTableName="[TableName2]" Range="[Excel.Sheet(&quot;Reports&quot;)]" />
-                                </Sequence>
-                              </ui:CommentOut.Body>
-                            </ui:CommentOut>
-                            <bec:BarChart ExecutionResult="{x:Null}" FilePassword="{x:Null}" LegendRange="{x:Null}" ModifyPassword="{x:Null}" CellRange="A1:C2" ChartTitle="ProcessingTime" ChartType="BarClustered" ContinueOnError="True" Delay="3" DisplayName="Bar Chart" FilePath="C:\Users\BellianBrianOtieno\OneDrive - THH LLC\Documents\UiPath\OnboardingReporter\Data\Reports.xlsx" sap:VirtualizedContainerService.HintSize="532.6666666666666,92.66666666666667" sap2010:WorkflowViewState.IdRef="BarChart_1" ImageCopy="[ImageFolder]" SheetName="Reports">
-                              <bec:BarChart.Options>
-                                <bec:ShowOptions AutoText="True" DataLabelsType="ShowPercent" HasLeaderLines="False" LegendKey="ShowLabel" Separator="" ShowBubbleSize="False" ShowCategoryName="False" ShowLegend="True" ShowPercentage="False" ShowSeriesName="True" ShowValue="True" />
-                              </bec:BarChart.Options>
-                              <bec:BarChart.Size>
-                                <bec:ChartSize Height="450" Left="50" Top="50" Width="350" />
-                              </bec:BarChart.Size>
-                            </bec:BarChart>
+                            <ueab:CreateTableX TableName="{x:Null}" DisplayName="Private: Format as Table" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,258.6666666666667" sap2010:WorkflowViewState.IdRef="CreateTableX_1" OutTableName="[TableName]" Range="[Excel.Sheet(&quot;Reports&quot;)]" />
+                            <ueab:CreateTableX TableName="{x:Null}" DisplayName="Format as Table" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,258.6666666666667" sap2010:WorkflowViewState.IdRef="CreateTableX_4" OutTableName="[TableName2]" Range="[Excel.Sheet(&quot;Onboarding Reporter&quot;)]" />
+                            <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="434,132" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                            <ueab:SaveAsPdfX DestinationPdfPath="Data\Report.pdf" DisplayName="Save Excel File As PDF" sap:VirtualizedContainerService.HintSize="434,186.66666666666666" sap2010:WorkflowViewState.IdRef="SaveAsPdfX_1" SaveQuality="StandardQuality" Workbook="[Excel]">
+                              <ueab:SaveAsPdfX.EndPage>
+                                <InArgument x:TypeArguments="s:Nullable(x:Int32)">
+                                  <Literal x:TypeArguments="s:Nullable(x:Int32)" Value="2" />
+                                </InArgument>
+                              </ueab:SaveAsPdfX.EndPage>
+                              <ueab:SaveAsPdfX.StartPage>
+                                <InArgument x:TypeArguments="s:Nullable(x:Int32)">
+                                  <Literal x:TypeArguments="s:Nullable(x:Int32)" Value="1" />
+                                </InArgument>
+                              </ueab:SaveAsPdfX.StartPage>
+                            </ueab:SaveAsPdfX>
                           </Sequence>
                         </ActivityAction>
                       </ueab:ExcelApplicationCard.Body>
@@ -220,33 +232,37 @@
                 </ActivityAction>
               </ueab:ExcelProcessScopeX.Body>
             </ueab:ExcelProcessScopeX>
-            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="str_TechSupportEmail" CacheStrategy="None" DisplayName="Get Asset" FolderPath="OnboardingEmailCoordinator" sap:VirtualizedContainerService.HintSize="724.6666666666666,184.66666666666666" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
-              <ui:GetRobotAsset.Value>
-                <OutArgument x:TypeArguments="x:String" />
-              </ui:GetRobotAsset.Value>
-            </ui:GetRobotAsset>
-            <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[in_Config(&quot;ReporterBody&quot;).ToString]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="724.6666666666666,198" sap2010:WorkflowViewState.IdRef="SendOutlookMail_3" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Config(&quot;ReporterSubject&quot;).ToString]" To="[in_Config(&quot;EmailCredentials&quot;).ToString]">
-              <ui:SendOutlookMail.Files>
-                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
-              </ui:SendOutlookMail.Files>
-            </ui:SendOutlookMail>
-            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="724.6666666666666,302" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-              <ui:CommentOut.Body>
-                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,199.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_39">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <Throw Exception="[new BusinessRuleException]" sap:VirtualizedContainerService.HintSize="354,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_1" />
-                </Sequence>
-              </ui:CommentOut.Body>
-            </ui:CommentOut>
+            <umab:OutlookApplicationCard Account="bellian.otieno@griffinglobaltech.com" AccountMismatchBehavior="UseDefaultEmailAccount" DisplayName="Use Desktop Outlook App" sap:VirtualizedContainerService.HintSize="626,608" sap2010:WorkflowViewState.IdRef="OutlookApplicationCard_1">
+              <umab:OutlookApplicationCard.Body>
+                <ActivityAction x:TypeArguments="um:IMailQuickHandle">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Outlook" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,397.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="354,132" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                    <ui:SendOutlookMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Account="[Outlook.SelectedAccount]" Body="[in_Config(&quot;ReporterBody&quot;).ToString]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="354,180.66666666666666" sap2010:WorkflowViewState.IdRef="SendOutlookMail_3" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Config(&quot;ReporterSubject&quot;).ToString]" To="[in_Config(&quot;EmailCredentials&quot;).ToString]">
+                      <ui:SendOutlookMail.Files>
+                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                          <InArgument x:TypeArguments="x:String">
+                            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_AttachmentPath" />
+                          </InArgument>
+                        </scg:List>
+                      </ui:SendOutlookMail.Files>
+                    </ui:SendOutlookMail>
+                  </Sequence>
+                </ActivityAction>
+              </umab:OutlookApplicationCard.Body>
+            </umab:OutlookApplicationCard>
           </Sequence>
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="853.3333333333334,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="754.6666666666666,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -290,7 +306,7 @@
             </Sequence>
           </ActivityAction>
         </Catch>
-        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="853.3333333333334,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="754.6666666666666,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
