@@ -193,20 +193,25 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:ExecuteQuery>
-          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" DataTable="[dt_DateRange]" DisplayName="Run Query" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="625.6,155.2" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" Sql="[in_Config(&quot;GetDateRangeQuery&quot;).ToString]">
+          <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" DataTable="[dt_DateRange]" DisplayName="Run Query - Get Date Range" ExistingDbConnection="[str_dbConnection]" sap:VirtualizedContainerService.HintSize="625.6,155.2" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" Sql="[in_Config(&quot;GetDateRangeQuery&quot;).ToString]">
             <ui:ExecuteQuery.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, Argument" />
             </ui:ExecuteQuery.Parameters>
           </ui:ExecuteQuery>
-          <Assign sap:VirtualizedContainerService.HintSize="625.6,121.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign sap2010:Annotation.AnnotationText="Iterates through all the columns in the dt_DateRange DataTable and extracts the names of each column." DisplayName="Extract Column Names" sap:VirtualizedContainerService.HintSize="625.6,121.6" sap2010:WorkflowViewState.IdRef="Assign_4">
             <Assign.To>
               <OutArgument x:TypeArguments="s:String[]">[arr_CoulumnNames]</OutArgument>
             </Assign.To>
             <Assign.Value>
               <InArgument x:TypeArguments="s:String[]">[(from dc in dt_DateRange.Columns.Cast(Of DataColumn)Select dc.ColumnName).ToArray]</InArgument>
             </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </Assign>
-          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="625.6,503.2" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arr_CoulumnNames]">
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Add the dt_DateRange data table columns into the dt_RetrievedData data table without column values." DisplayName="For Each" sap:VirtualizedContainerService.HintSize="625.6,503.2" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arr_CoulumnNames]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:String">
                 <ActivityAction.Argument>
@@ -222,8 +227,13 @@
                 </Sequence>
               </ActivityAction>
             </ui:ForEach.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:ForEach>
-          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[int_Index]" DataTable="[dt_DateRange]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="625.6,672" sap2010:WorkflowViewState.IdRef="ForEachRow_8">
+          <ui:ForEachRow ColumnNames="{x:Null}" sap2010:Annotation.AnnotationText="Add the dt_DateRange data table column values into dt_RetrievedData data table.&#xD;&#xA;&#xD;&#xA;" CurrentIndex="[int_Index]" DataTable="[dt_DateRange]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="625.6,672" sap2010:WorkflowViewState.IdRef="ForEachRow_8">
             <ui:ForEachRow.Body>
               <ActivityAction x:TypeArguments="sd:DataRow">
                 <ActivityAction.Argument>
@@ -249,7 +259,7 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_5">
                             <Assign.To>
-                              <OutArgument x:TypeArguments="x:Object">[dt_RetrievedData.rows(int_Index).Item(currentItem)]</OutArgument>
+                              <OutArgument x:TypeArguments="x:Object">[dt_RetrievedData.Rows(int_Index).Item(currentItem)]</OutArgument>
                             </Assign.To>
                             <Assign.Value>
                               <InArgument x:TypeArguments="x:Object">[CurrentRow.Item(currentItem)]</InArgument>
@@ -262,6 +272,11 @@
                 </Sequence>
               </ActivityAction>
             </ui:ForEachRow.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:ForEachRow>
           <ui:BuildDataTable DataTable="[dt_TransactionsAggregates]" DisplayName="Build Data Table - Transaction Status Summary" sap:VirtualizedContainerService.HintSize="625.6,100" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Successful_Transactions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Business_Exceptions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;System_Exceptions&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Transaction_Start_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:dateTime&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Transaction_End_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:dateTime&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
           <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_RetrievedData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="625.6,503.2" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
