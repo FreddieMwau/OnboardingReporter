@@ -4,7 +4,7 @@
     <x:Property Name="dt_TransactionsList" Type="InArgument(sd:DataTable)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1171.3333333333333,1167.3333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1397.3333333333333,1144</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -126,14 +126,10 @@
       <AssemblyReference>BalaReva.Excel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="612.6666666666666,1102.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_24">
+  <Sequence sap:VirtualizedContainerService.HintSize="612.6666666666666,1079.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_24">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="_out_GetRobotAsset_1__TextValue" />
-      <Variable x:TypeArguments="x:String" Name="Reports">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Reports</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="Reports" Name="Reports" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -141,7 +137,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="550.6666666666666,1014.6666666666666" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="550.6666666666666,991.3333333333334" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Variables>
         <Variable x:TypeArguments="x:String" Name="str_FolderPath" />
         <Variable x:TypeArguments="x:String" Name="str_FilePath" />
@@ -173,12 +169,8 @@
                   <ui:WriteRange AddHeaders="True" DataTable="[dt_TransactionsList]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="[Reports]" StartingCell="A1:C2" WorkbookPath="Data\Reports.xlsx" />
                   <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ChartGenerator.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Reporter\ChartGenerator.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                        <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-                      </InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="Reports">
-                        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Reports" />
-                      </InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Reports">[Reports]</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </Sequence>
@@ -228,34 +220,6 @@
                 </ui:SendOutlookMail.Files>
               </ui:SendOutlookMail>
               <Rethrow sap:VirtualizedContainerService.HintSize="434,48" sap2010:WorkflowViewState.IdRef="Rethrow_3" />
-            </Sequence>
-          </ActivityAction>
-        </Catch>
-        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="516.6666666666666,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_2">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="ui:BusinessRuleException">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
-            </ActivityAction.Argument>
-            <Sequence sap:VirtualizedContainerService.HintSize="416,330.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_30">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[in_Config(&quot;EmailSubject&quot;).ToString]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="354,198" sap2010:WorkflowViewState.IdRef="SendOutlookMail_3" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Config(&quot;EmailSubject&quot;).ToString]" To="[in_Config(&quot;EmailCredentials&quot;).ToString]">
-                <ui:SendOutlookMail.Files>
-                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                    <InArgument x:TypeArguments="x:String">[str_FilePath]</InArgument>
-                  </scg:List>
-                </ui:SendOutlookMail.Files>
-              </ui:SendOutlookMail>
-              <Rethrow sap:VirtualizedContainerService.HintSize="354,48" sap2010:WorkflowViewState.IdRef="Rethrow_4" />
             </Sequence>
           </ActivityAction>
         </Catch>
