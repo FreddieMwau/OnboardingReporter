@@ -169,8 +169,12 @@
                   <ui:WriteRange AddHeaders="True" DataTable="[dt_TransactionsList]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="[Reports]" StartingCell="A1:C2" WorkbookPath="Data\Reports.xlsx" />
                   <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ChartGenerator.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,138" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Reporter\ChartGenerator.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="Reports">[Reports]</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                        <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Reports">
+                        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Reports" />
+                      </InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </Sequence>

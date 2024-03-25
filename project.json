@@ -8,9 +8,11 @@
     "UiPath.Database.Activities": "[1.8.2-preview]",
     "UiPath.Excel.Activities": "[2.23.2-preview]",
     "UiPath.Mail.Activities": "[1.22.2]",
+    "UiPath.PDF.Activities": "[3.19.0-preview]",
     "UiPath.System.Activities": "[24.2.0-preview]",
     "UiPath.Testing.Activities": "[24.2.0-preview]",
-    "UiPath.UIAutomation.Activities": "[24.2.0-preview]"
+    "UiPath.UIAutomation.Activities": "[24.2.0-preview]",
+    "UiPath.Word.Activities": "[1.19.1-preview]"
   },
   "webServices": [],
   "entitiesStores": [],
