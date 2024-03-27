@@ -11,8 +11,7 @@
     "UiPath.PDF.Activities": "[3.19.0-preview]",
     "UiPath.System.Activities": "[24.2.0-preview]",
     "UiPath.Testing.Activities": "[24.2.0-preview]",
-    "UiPath.UIAutomation.Activities": "[24.2.0-preview]",
-    "UiPath.Word.Activities": "[1.19.1-preview]"
+    "UiPath.UIAutomation.Activities": "[24.2.0-preview]"
   },
   "webServices": [],
   "entitiesStores": [],
