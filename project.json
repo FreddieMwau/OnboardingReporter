@@ -4,13 +4,10 @@
   "description": "This automation is responsible of running a couple of SQL Queries, generating a weekly report and emails it to the clients plus cc's the RPA team",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.Database.Activities": "[1.8.2-preview]",
     "BalaReva.Excel.Activities": "[2021.1.0]",
     "UiPath.Database.Activities": "[1.8.2-preview]",
     "UiPath.Excel.Activities": "[2.23.2-preview]",
     "UiPath.Mail.Activities": "[1.22.2]",
-    "UiPath.Mail.Activities": "[1.22.2]",
-    "UiPath.PDF.Activities": "[3.19.0-preview]",
     "UiPath.System.Activities": "[24.2.0-preview]",
     "UiPath.Testing.Activities": "[24.2.0-preview]",
     "UiPath.UIAutomation.Activities": "[24.2.0-preview]"
